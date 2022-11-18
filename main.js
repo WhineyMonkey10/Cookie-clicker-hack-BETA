@@ -30,8 +30,7 @@ function main() {
         } else if (input == "3") {
             Game.RuinTheFun();
         } else if (input == "4") {
-            alert("This does not currently work.")
-            let cps = prompt("How many cookies per second would you like to set?");
+            let cps = prompt("How many cookies per second would you like to set? Do not click the cookie once you set this, it will simulate clicks for you.");
             
             Game.cookiesPs=parseInt(cps);
         } else if (input == "5") {
