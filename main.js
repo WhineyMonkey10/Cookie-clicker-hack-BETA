@@ -10,7 +10,7 @@ main();
 
 function main() {
     // Get the user's input
-    var input = prompt("Add cookies (1)       set cookies (2)       ruin the fun (3)       set cookies per second (4, not curerntly working)       set bakery name (5)       get all upgrades (6)       get all achievements (7)       more coming soon <3");
+    var input = prompt("Add cookies (1)       set cookies (2)       ruin the fun (3)       set bakery name (4)       get all upgrades (5)       get all achievements (6)       more coming soon <3");
     // Check if the user's input is valid
     if (input == null || input == "") {
         // If the user's input is invalid, show an error
@@ -29,20 +29,17 @@ function main() {
             Game.cookies = parseInt(cookies);
         } else if (input == "3") {
             Game.RuinTheFun();
+
         } else if (input == "4") {
-            let cps = prompt("How many cookies per second would you like to set? Do not click the cookie once you set this, it will simulate clicks for you.");
-            
-            Game.cookiesPs=parseInt(cps);
-        } else if (input == "5") {
             let name = prompt("What would you like to name your bakery?");
             Game.bakeryName=name;
             Game.bakeryNameRefresh();
-        } else if (input == "6") {
+        } else if (input == "5") {
             alert("This does not currently work.")
             Game.UpgradesById.forEach(function(upgrade) {
                 upgrade.bought = 1;
             });
-        } else if (input == "7") {
+        } else if (input == "6") {
             alert("This does not currently work.")
             Game.AchievementsById.forEach(function(achievement) {
                 achievement.won = 1;
