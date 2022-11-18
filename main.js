@@ -34,10 +34,9 @@ function main() {
             
             Game.cookiesPs=parseInt(cps);
         } else if (input == "5") {
-            alert("This does not currently work.")
             let name = prompt("What would you like to name your bakery?");
-            
-            Game.bakeryName="name";
+            Game.bakeryName=name;
+            Game.bakeryNameRefresh();
         } else if (input == "6") {
             alert("This does not currently work.")
             Game.UpgradesById.forEach(function(upgrade) {
