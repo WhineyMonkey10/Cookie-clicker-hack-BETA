@@ -16,8 +16,8 @@ function main() {
         // If the user's input is invalid, show an error
         alert("You need to enter something to hack!");
     } else {
-        // If the user's input is valid, show a success message
-        alert("Close this to start the hack!");
+     
+
         // Start the hack
         if (input == "1") {
             let cookies = prompt("How many cookies would you like to add?");
@@ -30,18 +30,22 @@ function main() {
         } else if (input == "3") {
             Game.RuinTheFun();
         } else if (input == "4") {
+            alert("This does not currently work.")
             let cps = prompt("How many cookies per second would you like to set?");
             
             Game.cookiesPs=parseInt(cps);
         } else if (input == "5") {
+            alert("This does not currently work.")
             let name = prompt("What would you like to name your bakery?");
             
             Game.bakeryName="name";
         } else if (input == "6") {
+            alert("This does not currently work.")
             Game.UpgradesById.forEach(function(upgrade) {
                 upgrade.bought = 1;
             });
         } else if (input == "7") {
+            alert("This does not currently work.")
             Game.AchievementsById.forEach(function(achievement) {
                 achievement.won = 1;
             });
