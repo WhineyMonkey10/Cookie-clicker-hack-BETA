@@ -67,7 +67,7 @@ function main() {
             Game.OpenSesame();
         } else if (input == "9"){
             var newShimmer=new 
-            Game.shimmer(“golden”);
+            Game.shimmer("golden");
         } else if (input == "10"){
             let amt = prompt("How many sugar lumps?")
             Game.lumps = [amt];
