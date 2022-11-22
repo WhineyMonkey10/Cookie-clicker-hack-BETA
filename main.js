@@ -18,7 +18,7 @@ document.addEventListener("keyup",function(evt){
 
 function main() {
     // Get the user's input
-    var input = prompt("                                           🍪 -- Cheat Panel -- 🍪\n\nAdd Cookies (1) \n\n Set Cookies (2) \n\n Ruin the Fun (3) \n\n Set Bakery Name (4) \n\n Get All Upgrades (Doesn't Work) (5) \n\n Get All Achievements (Half Works) (6)\n\n Dump Logs (7) \n\n Set CPS (Don't Click the Cookie once used) (11)\n\n🍪 More Coming Soon <3 🍪");
+    var input = prompt("                                           🍪 -- Cheat Panel -- 🍪\n\nAdd Cookies (1) \n\n Set Cookies (2) \n\n Ruin the Fun (3) \n\n Set Bakery Name (4) \n\n Get All Upgrades (Doesn't Work) (5) \n\n Get All Achievements (Half Works) (6)\n\n Dump Logs (7) \n\nOpen Another Panel (8)\n\n Spawn in a golden cookie (9)\n\n Get sugar lumps (10)\n\n Set CPS (Don't Click the Cookie once used) (11)\n\n🍪 More Coming Soon <3 🍪");
     // Check if the user's input is valid
     if (input == null || input == "") {
         // If the user's input is invalid, show an error
@@ -63,8 +63,19 @@ function main() {
                 console.log("Frenzy Max: " + Game.frenzyMax);
                 console.log("Frenzy Min: " + Game.frenzyMin);
                 console.log("Dumped Logs!");
+        } else if (input == "8") {
+            Game.OpenSesame();
+        } else if (input == "9"){
+            var newShimmer=new 
+            Game.shimmer("golden");
+        } else if (input == "10"){
+            let amt = prompt("How many sugar lumps?")
+            Game.lumps = [amt];
+        } else if (input == "11"){
+            let cps = prompt("How many CPS?");
+            Game.cookiesPs = parseInt(cps);
         } else {
-            alert("Invalid input!");
+            alert("Invalid Input!");
         }
     }
 }
