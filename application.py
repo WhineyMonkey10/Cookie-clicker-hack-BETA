@@ -66,42 +66,32 @@ class functions:
             time.sleep(1)
             username = username
 
-            if username == "admin":
-                response.configure(text="Cannot delete admin account.")
-                response.update()
+            #if username == "admin":
+            #    response.configure(text="Cannot delete admin account.")
+            #    response.update()
                 
-            else:
-                response.configure(text="Connecting to database...")
-                response.update()
-                time.sleep(0.5)
             
-                load_dotenv()
-                connectionstring = os.getenv('MONGODB')
-                print(connectionstring)
-                client = MongoClient(connectionstring)
-                dbname = "cookiehacks"
-                collection = "credentials"
-                print("Connected to database.")
+            response.configure(text="Connecting to database...")
+            response.update()
+        
+            load_dotenv()
+            connectionstring = os.getenv('MONGODB')
+            print(connectionstring)
+            client = MongoClient(connectionstring)
+            dbname = "cookiehacks"
+            collection = "credentials"
+            print("Connected to database.")
+            # Find the user to delete, then delete it
+            response.configure(text="Finding user...")
+            response.update()
+            time.sleep(1)
+            db = client[dbname]
+            col = db[collection]
+            query = {"username": username}
+            col.delete_one(query)
+            response.configure(text="User deleted.")
+            response.update()
 
-                if username in client[dbname][collection].find_one({"username": username}):
-                    print("User found.")
-                    response.configure(text="Deleting user...")
-                    response.update()
-                    time.sleep(0.5)
-                    client[dbname][collection].delete_one({"username": username})
-                    print("User deleted.")
-                    response.configure(text="User deleted.")
-                    response.update()
-                    time.sleep(0.5)
-                    response.configure(text="Done.")
-                    response.update()
-
-                else:
-                    response.configure(text="User not found.")
-                    response.update()
-                    return
-            
-    
     
     class utils:
         def mousePos():
