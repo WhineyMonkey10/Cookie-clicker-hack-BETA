@@ -15,11 +15,18 @@ import dotenv
 from dotenv import load_dotenv
 
 customtkinter.set_appearance_mode("dark")
-customtkinter.set_default_color_theme("dark-blue")
+customtkinter.set_default_color_theme("green")
+
 
 root = customtkinter.CTk()
 root.geometry("500x300")
 root.title("🍪 Cookie Clicker Hack 🍪")
+
+def make_window():
+    root = customtkinter.CTk()
+    root.geometry("500x300")
+    root.title("🍪 Cookie Clicker Hack 🍪")
+
 
 # Lists
 
@@ -28,7 +35,6 @@ lpassword = []
 
 
 # Init
-
 
 username = None
 password = None
@@ -51,6 +57,52 @@ class cookies:
         computer.typewrite("Game.cookies += " + str(amount))
         computer.press("enter")
 class functions:
+    
+    class admin:
+        def delete(username, response):
+            response = response
+            response.configure(text="Deleting user...")
+            response.update()
+            time.sleep(1)
+            username = username
+
+            if username == "admin":
+                response.configure(text="Cannot delete admin account.")
+                response.update()
+                
+            else:
+                response.configure(text="Connecting to database...")
+                response.update()
+                time.sleep(0.5)
+            
+                load_dotenv()
+                connectionstring = os.getenv('MONGODB')
+                print(connectionstring)
+                client = MongoClient(connectionstring)
+                dbname = "cookiehacks"
+                collection = "credentials"
+                print("Connected to database.")
+
+                if username in client[dbname][collection].find_one({"username": username}):
+                    print("User found.")
+                    response.configure(text="Deleting user...")
+                    response.update()
+                    time.sleep(0.5)
+                    client[dbname][collection].delete_one({"username": username})
+                    print("User deleted.")
+                    response.configure(text="User deleted.")
+                    response.update()
+                    time.sleep(0.5)
+                    response.configure(text="Done.")
+                    response.update()
+
+                else:
+                    response.configure(text="User not found.")
+                    response.update()
+                    return
+            
+    
+    
     class utils:
         def mousePos():
             while True:
@@ -88,7 +140,7 @@ class functions:
             label.configure(text="Username: " + username + "       Password: " + "********** (Hidden)")
             label.update()
             time.sleep(0.5)
-            label.configure(text="Logging in...")
+            label.configure(text="Connecting to database...")
             label.update()
             time.sleep(0.5)
             
@@ -103,7 +155,24 @@ class functions:
             time.sleep(0.5)
             label.configure(text="Checking if credentials exist...")
             label.update()
-            if client[dbname][collection].find_one({"username": username, "password": password}):
+
+            #Check if the credentials are admin credentials
+            if username == "admin" and password == client[dbname][collection].find_one({"username": "admin"})["password"]:    
+            
+                label.configure(text="Logged in as admin!")
+                label.update()
+                time.sleep(0.5)
+                label.configure(text="Welcome, admin!")
+                label.update()
+                time.sleep(0.5)
+                label.configure(text="Loading admin panel...")
+                label.update()
+                time.sleep(0.5)
+                root.destroy()
+                time.sleep(0.5)
+                hack.admin()
+            
+            elif client[dbname][collection].find_one({"username": username, "password": password}):
                 time.sleep(0.5)
                 label.configure(text="Logged in!")
                 label.update()
@@ -128,6 +197,8 @@ class functions:
                 label.configure(text="Opening main menu...")
                 label.update()
                 time.sleep(0.5)
+                root.destroy()
+                hack.run()
                 
             else:
                 # State that the credentials are wrong
@@ -163,7 +234,7 @@ class functions:
             login = customtkinter.CTkButton(master=frame, text="Login", command=lambda: functions.login.login(username, password, info))
             login.pack(pady=10, padx=10)
 
-            info = customtkinter.CTkLabel(master=frame, text="Info")
+            info = customtkinter.CTkLabel(master=frame, text="")
             info.pack( pady=10, padx=10)
 
 
@@ -176,6 +247,10 @@ class functions:
 
 class hack:
     def run():
+        root = customtkinter.CTk()
+        root.geometry("500x300")
+        root.title("🍪 Cookie Clicker Hack 🍪")
+
         frame = customtkinter.CTkFrame(master=root)
         frame.pack(pady=20, padx=20, fill="both", expand=True)
 
@@ -195,6 +270,37 @@ class hack:
         goto.pack(pady=10, padx=10)
         
         root.mainloop()
+    
+    def admin():
+        root = customtkinter.CTk()
+        root.geometry("1000x500")
+        root.title("🍪 Admin Panel 🍪")
+
+        frame = customtkinter.CTkFrame(master=root)
+        frame.pack(pady=20, padx=20, fill="both", expand=True)
+
+        window = customtkinter.CTkLabel(master=frame, text="🍪 Administrator Panel 🍪")
+        window.pack(pady=12, padx=10)
+
+        username = customtkinter.CTkEntry(master=frame, placeholder_text="Username")
+        password = customtkinter.CTkEntry(master=frame, placeholder_text="Password (optional)")
+        deluser = customtkinter.CTkButton(master=frame, text="Delete User", command=lambda: functions.admin.delete(username, response))
+        adduser = customtkinter.CTkButton(master=frame, text="Add User", command=lambda: functions.admin.add(username, password, response))
+        detailsuser = customtkinter.CTkButton(master=frame, text="Get User Details", command=lambda: functions.admin.get(username, response))
+        userid = customtkinter.CTkButton(master=frame, text="Get User ID", command=lambda: functions.admin.getId(username, response))
+        response = customtkinter.CTkLabel(master=frame, text="")
+
+        deluser.pack(pady=10, padx=10)
+        adduser.pack(pady=10, padx=10)
+        detailsuser.pack(pady=10, padx=10)
+        userid.pack(pady=10, padx=10)
+        username.pack(pady=10, padx=10)
+        password.pack(pady=10, padx=10)
+        response.pack(pady=10, padx=10)        
+
+        root.mainloop()
+    
+
 
         #window = gui.Window('🍪', [[gui.Text('Choose one of the below options')], [gui.Input('')] ,[gui.Button('Set Cookies')], [gui.Button('Add Cookies'), gui.Button('Exit')]], margins=(300, 150))
 
