@@ -98,30 +98,47 @@ class functions:
             dbname = "cookiehacks"
             collection = "credentials"
             
-            label.configure(text="Connected to database!")
+            label.configure(text="Connected to database...")
             label.update()
             time.sleep(0.5)
             label.configure(text="Checking if credentials exist...")
             label.update()
-            time.sleep(0.5)
             if client[dbname][collection].find_one({"username": username, "password": password}):
+                time.sleep(0.5)
+                label.configure(text="Logged in!")
+                label.update()
+                time.sleep(0.5)
                 label.configure(text="Cleaning up... estimated time: 0.2 seconds")
                 label.update()
-                time.sleep(0.2)
+                time.sleep(0.5)
                 username = []
                 password = []
+                #Clear terminal
+                label.configure(text="Clearing terminal...")
+                label.update()
+                time.sleep(0.5)
+                os.system("cls")
+                label.configure(text="Cleared terminal")
+                label.update()
+                time.sleep(0.5)
+                #---------#
+                #label.configure(text="Cleaned")
+                label.update()
+                time.sleep(0.5)
                 label.configure(text="Opening main menu...")
                 label.update()
+                time.sleep(0.5)
                 
             else:
                 # State that the credentials are wrong
                 label.configure(text="Wrong credentials!")
-            
-                time.sleep(2)
+                label.update()
+                time.sleep(0.5)
                 label.configure(text="Cleaning up... estimated time: 0.2 seconds")
+                label.update()
+                time.sleep(0.5)
                 username = []
                 password = []
-                time.sleep(0.1)
                 label.configure(text="Cleaned")
                 #Clear terminal
                 #os.system("cls")
