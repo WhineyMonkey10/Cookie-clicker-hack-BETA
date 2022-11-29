@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "repl_nix_Cookie-clicker-hack-BETA"
+version = "0.1.0"
+description = ""
+authors = ["Replit user <<>>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+keyboard = "^0.13.5"
+PyAutoGUI = "^0.9.53"
+pymongo = "^4.3.3"
+python-dotenv = "^0.21.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

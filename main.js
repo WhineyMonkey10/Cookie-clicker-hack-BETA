@@ -72,10 +72,10 @@ function main() {
             let amt = prompt("How many sugar lumps?")
             Game.lumps = [amt];
         } else if (input == "11"){
-            //let cps = prompt("How many CPS?");
-            //Game.cookiesPs = parseInt(cps);
-            //Game.ClickCookie();
-            Game.AutoClicker();
+            let cps = prompt("How many CPS?");
+            Game.cookiesPs = parseInt(cps);
+            Game.ClickCookie();
+  
         } else {
             alert("Invalid Input!");
         }
